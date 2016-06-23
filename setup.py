@@ -18,7 +18,7 @@ setup(
     description='Simple, consistent APIs for popular Python packages.',
     long_description=README,
     author='Grok Learning',
-    author_email='social@groklearning.com',
+    author_email='opensource@groklearning.com',
     maintainer='Tim Dawborn',
     maintainer_email='tim.dawborn@gmail.com',
     url='https://github.com/groklearning/simple-packages',
@@ -46,5 +46,6 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
     ],
 )
