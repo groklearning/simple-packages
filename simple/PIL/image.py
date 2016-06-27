@@ -22,12 +22,12 @@ class Pixel:
     self._mode = mode
     self._pixels = pixels
     if check:
+      # Use the property which checks the coordinates completely.
+      self.coords = (x, y)
+    else:
       self._x = x
       self._y = y
       self._coords = (x, y)
-    else:
-      # Use the property which checks the coordinates completely.
-      self.coords = (x, y)
 
   def get_coords(self):
     return self._coords
@@ -336,3 +336,11 @@ class Image:
     for x in range(self.width):
       for y in range(self.height):
         yield self._pixel_type(self._image.mode, self._pixel_access, x, y, False)
+
+  def __getitem__(self, index):
+    try:
+      x = int(index[0])
+      y = int(index[1])
+    except TypeError:
+      raise TypeError('The index for an image must be a list or tuple.')
+    return self._pixel_type(self._image.mode, self._pixel_access, x, y, True)
