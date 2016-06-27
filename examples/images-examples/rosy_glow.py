@@ -1,7 +1,7 @@
 
-from simple.PIL import images
+from simple.PIL import Image
 
-image = images.open('yawn.png')
+image = Image.open('yawn.png')
 
 for pixel in image:
     pixel.red += 50

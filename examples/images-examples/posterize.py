@@ -1,11 +1,10 @@
 
-from simple.PIL import images
+from simple.PIL import Image
 
-image = images.open('pug_bw.png')
+image = Image.open('pug_bw.png')
 
 for pixel in image:
-    value = pixel.grey
-    if value < 130:
+    if pixel.grey < 130:
         pixel.grey = 0
     else:
         pixel.grey = 255

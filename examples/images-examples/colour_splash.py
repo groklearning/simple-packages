@@ -1,7 +1,7 @@
 
-from simple.PIL import images
+from simple.PIL import Image
 
-image = images.open('strawberries.png')
+image = Image.open('strawberries.png')
 
 for pixel in image:
     avg = (pixel.red + pixel.green + pixel.blue) / 3

@@ -1,9 +1,7 @@
 
-from simple.PIL import images
+from simple.PIL import Image
 
-from PIL import Image
-
-image = images.open('squirrel.png')
+image = Image.open('squirrel.png')
 
 for pixel in image:
     pixel.red -= 80

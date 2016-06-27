@@ -1,10 +1,10 @@
 
-from simple.PIL import images
+from simple.PIL import Image
 
-image = images.open('dragonfly.png')
+image = Image.open('yawn.png')
 
-for pixel in image.pixels():
-    pixel.green = pixel.blue
-    pixel.red = pixel.blue
+for pixel in image:
+    pixel.green = 0
+    pixel.red = 0
 
-images.save('output.png')
+image.save('output.png')

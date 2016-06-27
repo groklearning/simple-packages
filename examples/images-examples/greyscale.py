@@ -1,8 +1,8 @@
 
-from simple.PIL import images
+from simple.PIL import Image
 
-image = images.open('strawberries.png')
-out = images.new('L', image.width, image.height)
+image = Image.open('strawberries.png')
+out = Image.new('L', image.width, image.height)
 
 for pixel, outpixel in zip(image, out):
     outpixel.grey = (pixel.red + pixel.green + pixel.blue) / 3
