@@ -29,6 +29,13 @@ class TestImageConstructors(ImageTestCase):
 
     self.assertImageEqual(img1, img2)
 
+  def test_split_merge(self):
+    img1 = Image.open(os.path.join(IMAGE_DIR, 'strawberries.png'))
+    red, green, blue = img1.split()
+    img2 = Image.merge('RGB', (red, green, blue))
+
+    self.assertImageEqual(img1, img2)
+
 
 class TestImageFunctions(ImageTestCase):
 
@@ -106,3 +113,59 @@ class TestPixelIndexing(ImageTestCase):
       self.fail()
     except IndexError as e:
       pass
+
+
+class TestPixelModifications(ImageTestCase):
+
+  def test_modify_pixel_bw(self):
+    img1 = Image.open(os.path.join(IMAGE_DIR, 'leaves_bw.png'))
+    pixel1 = img1[4, 360]
+    pixel2 = img1[4, 360]
+    self.assertEqual(pixel1.get_coords(), (4, 360))
+    self.assertEqual(pixel1.gray, 67)
+    self.assertEqual(pixel2.get_coords(), (4, 360))
+    self.assertEqual(pixel2.gray, 67)
+
+    pixel1.gray = 0
+    self.assertEqual(pixel1.gray, 0)
+    self.assertEqual(pixel2.gray, 0)
+
+    # Get a new pixel object and check that it's also changed.
+    pixel3 = img1[4, 360]
+    self.assertEqual(pixel3.gray, 0)
+
+  def test_modify_pixel_rgb(self):
+    img1 = Image.open(os.path.join(IMAGE_DIR, 'strawberries.png'))
+
+    pixel1 = img1[4, 360]
+    self.assertEqual(pixel1.get_coords(), (4, 360))
+    self.assertEqual(pixel1.red, 41)
+    self.assertEqual(pixel1.green, 4)
+    self.assertEqual(pixel1.blue, 11)
+
+    pixel2 = img1[4, 360]
+    self.assertEqual(pixel2.get_coords(), (4, 360))
+    self.assertEqual(pixel2.red, 41)
+    self.assertEqual(pixel2.green, 4)
+    self.assertEqual(pixel2.blue, 11)
+
+    pixel1.red = 10
+    pixel1.green = 20
+    pixel1.blue = 30
+
+    self.assertEqual(pixel1.red, 10)
+    self.assertEqual(pixel1.green, 20)
+    self.assertEqual(pixel1.blue, 30)
+    self.assertEqual(pixel2.red, 10)
+    self.assertEqual(pixel2.green, 20)
+    self.assertEqual(pixel2.blue, 30)
+
+  def test_full_image_modification(self):
+    actual = Image.open(os.path.join(IMAGE_DIR, 'squirrel.png'))
+    expected = Image.open(os.path.join(IMAGE_DIR, 'blueshift_squirrel.png'))
+
+    for pixel in actual:
+      pixel.red -= 80
+      pixel.green -= 20
+
+    self.assertImageEqual(expected, actual)
