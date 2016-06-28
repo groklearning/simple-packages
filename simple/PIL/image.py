@@ -321,15 +321,15 @@ class Image:
 
   @staticmethod
   def alpha_composite(image1, image2):
-    return Image(PILImage.alpha_composit(image1, image2)
+    return Image(PILImage.alpha_composit(image1, image2))
 
   @staticmethod
   def composite(image1, image2, mask):
-    return Image(PILImage.blend(image1, image2, mask)
+    return Image(PILImage.blend(image1, image2, mask))
 
   @staticmethod
   def blend(image1, image2, alpha):
-    return Image(PILImage.blend(image1, image2, alpha)
+    return Image(PILImage.blend(image1, image2, alpha))
 
   @staticmethod
   def eval(image, *args):
@@ -380,4 +380,6 @@ class Image:
       y = int(index[1])
     except TypeError:
       raise TypeError('The index for an image must be a list or tuple.')
+    except IndexError:
+      raise IndexError('To look up a specifc pixel, the index must have two values: for the (x, y) coordinates.')
     return self._pixel_type(self._image.mode, self._pixel_access, x, y, True)
