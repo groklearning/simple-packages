@@ -319,6 +319,43 @@ class Image:
   def new(mode, width, height):
     return Image(PILImage.new(mode, (width, height)))
 
+  @staticmethod
+  def alpha_composite(image1, image2):
+    return Image(PILImage.alpha_composit(image1, image2)
+
+  @staticmethod
+  def composite(image1, image2, mask):
+    return Image(PILImage.blend(image1, image2, mask)
+
+  @staticmethod
+  def blend(image1, image2, alpha):
+    return Image(PILImage.blend(image1, image2, alpha)
+
+  @staticmethod
+  def eval(image, *args):
+    return Image(PILImage.eval(image, *args))
+
+  @staticmethod
+  def merge(*args, **kwargs):
+    return Image(PILImage.merge(*args, **kwargs))
+
+  @staticmethod
+  def fromarray(*args, **kwargs):
+    return Image(PILImage.fromarray(*args, **kwargs))
+
+  @staticmethod
+  def frombytes(*args, **kwargs):
+    return Image(PILImage.frombytes(*args, **kwargs))
+
+  @staticmethod
+  def fromstring(*args, **kwargs):
+    return Image(PILImage.fromstring(*args, **kwargs))
+
+  @staticmethod
+  def frombuffer(*args, **kwargs):
+    return Image(PILImage.frombuffer(*args, **kwargs))
+
+
   def __init__(self, image):
     self._image = image
     self._pixel_access = image.load()
