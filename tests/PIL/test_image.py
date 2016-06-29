@@ -17,6 +17,13 @@ class TestImageConstructors(ImageTestCase):
 
     self.assertImageEqual(img1, img2)
 
+  def test_open_fail(self):
+    try:
+      Image.open('')
+      self.fail()
+    except ValueError:
+      pass
+
   def test_open_grayscale(self):
     img1 = Image.open(os.path.join(IMAGE_DIR, 'leaves_bw.png'))
     self.assertEqual(img1.mode, 'L')
@@ -61,6 +68,23 @@ class TestImageFunctions(ImageTestCase):
     self.assertEqual(last_pixel.red, 242)
     self.assertEqual(last_pixel.green, 25)
     self.assertEqual(last_pixel.blue, 34)
+
+  def test_save(self):
+    img1 = Image.open(os.path.join(IMAGE_DIR, 'strawberries.png'))
+    try:
+      img1.save('')
+      self.fail()
+    except ValueError:
+      pass
+
+    try:
+      out_path = os.path.join(IMAGE_DIR, 'output.png')
+      img1.save(out_path)
+      self.assertTrue(os.path.isfile(out_path))
+    finally:
+      # Clean up the file.
+      if os.path.isfile(out_path):
+        os.remove(out_path)
 
 
 class TestPixelIndexing(ImageTestCase):

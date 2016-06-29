@@ -313,6 +313,8 @@ class RGBAPixel(RGBPixel):
 class Image:
   @staticmethod
   def open(filename, **kwargs):
+    if not filename:
+      raise ValueError('Cannot open image with empty file name.')
     return Image(PILImage.open(filename, **kwargs))
 
   @staticmethod
@@ -325,7 +327,7 @@ class Image:
 
   @staticmethod
   def composite(image1, image2, mask):
-    return Image(PILImage.blend(image1, image2, mask))
+    return Image(PILImage.composite(image1, image2, mask))
 
   @staticmethod
   def blend(image1, image2, alpha):
@@ -376,10 +378,15 @@ class Image:
 
   def __getitem__(self, index):
     try:
-      x = int(index[0])
-      y = int(index[1])
-    except TypeError:
-      raise TypeError('The index for an image must be a list or tuple.')
-    except IndexError:
-      raise IndexError('To look up a specifc pixel, the index must have two values: for the (x, y) coordinates.')
+      x = index[0]
+      y = index[1]
+    except (TypeError, IndexError) as e:
+      raise e.__class__('A pixel coordinate should be a pair of numbers: (x, y).') from None
+    if len(index) > 2:
+      raise ValueError('A pixel coordinate should be a pair of numbers: (x, y).')
     return self._pixel_type(self._image.mode, self._pixel_access, x, y, True)
+
+  def save(self, filename, *args, **kwargs):
+    if filename == '':
+      raise ValueError('Cannot save image to empty filename.')
+    return self._image.save(filename, *args, **kwargs)
