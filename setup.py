@@ -37,9 +37,10 @@ setup(
     test_suite='nose.collector',
     tests_require=[
         'nose',
+        'python-coveralls',
     ],
     classifiers=[
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Programming Language :: Python',
