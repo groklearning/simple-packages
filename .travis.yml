@@ -11,3 +11,4 @@ install:
   - pip install -r test_requirements.txt
 script:
   - nosetests
+  - pycodestyle examples simple tests
