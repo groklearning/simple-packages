@@ -23,6 +23,10 @@ setup(
     maintainer_email='opensource@groklearning.com',
     url='https://github.com/groklearning/simple-packages',
     license='MIT',
+    package_data={
+        '': ['README.md'],
+    },
+    include_package_data=True,
     package_dir={
         'simple': 'simple',
         'simple.PIL': 'simple/PIL',
