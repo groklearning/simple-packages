@@ -39,7 +39,7 @@ class Pixel:
             self._pixels[value[0], value[1]]
         except TypeError:
             raise TypeError(
-                    'Each coordinate must be an int or float.') from None
+                'Each coordinate must be an int or float.') from None
         except IndexError:
             try:
                 self._pixels[value[0], 0]
@@ -50,14 +50,14 @@ class Pixel:
                 else:
                     raise ValueError(
                         'The x-coordinate must be less than the image width.'
-                        ) from None
+                    ) from None
             if value[1] < 0:
                 raise ValueError(
                     'The y-coordinate cannot be less than zero.') from None
             else:
                 raise ValueError(
                     'The y-coordinate must be less than the image width.'
-                    ) from None
+                ) from None
 
         self._x = int(value[0])
         self._y = int(value[1])
@@ -82,7 +82,7 @@ class Pixel:
             else:
                 raise IndexError(
                     'The x-coordinate must be less than the image width.'
-                    ) from None
+                ) from None
         self._x = int(value)
         self._coords = (self._x, self._y)
 
@@ -104,7 +104,7 @@ class Pixel:
             else:
                 raise IndexError(
                     'The y-coordinate must be less than the image height.'
-                    ) from None
+                ) from None
         self._y = int(value)
         self._coords = (self._x, self._y)
 
@@ -253,6 +253,9 @@ class Pixel:
 
 
 class GrayPixel(Pixel):
+
+    __slots__ = ()
+
     def get_color(self):
         return self._pixels[self._coords]
 
@@ -292,6 +295,9 @@ class GrayPixel(Pixel):
 
 
 class RGBPixel(Pixel):
+
+    __slots__ = ()
+
     def set_color(self, value):
         if type(value) == tuple:
             try:
@@ -364,6 +370,9 @@ class RGBPixel(Pixel):
 
 
 class RGBAPixel(RGBPixel):
+
+    __slots__ = ()
+
     def get_alpha(self):
         return self._pixels[self._coords][0]
 
@@ -456,7 +465,7 @@ class Image:
         except (TypeError, IndexError) as e:
             raise e.__class__(
                 'A pixel coordinate should be a pair of numbers: (x, y).'
-                ) from None
+            ) from None
         if len(index) > 2:
             raise ValueError(
                 'A pixel coordinate should be a pair of numbers: (x, y).')
