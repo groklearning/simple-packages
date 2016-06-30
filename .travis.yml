@@ -12,3 +12,4 @@ install:
 script:
   - nosetests
   - pycodestyle examples simple tests
+  - flake8 examples simple tests

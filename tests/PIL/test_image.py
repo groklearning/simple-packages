@@ -130,13 +130,13 @@ class TestPixelIndexing(ImageTestCase):
         img1 = Image.open(os.path.join(IMAGE_DIR, 'leaves_bw.png'))
 
         try:
-            first_pixel = img1[0]
+            img1[0]
             self.fail()
         except TypeError as e:
             pass
 
         try:
-            first_pixel = img1[0, ]
+            img1[0, ]
             self.fail()
         except IndexError as e:
             pass
