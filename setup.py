@@ -19,8 +19,8 @@ setup(
     long_description=README,
     author='Grok Learning',
     author_email='opensource@groklearning.com',
-    maintainer='Tim Dawborn',
-    maintainer_email='tim.dawborn@gmail.com',
+    maintainer='Grok Learning',
+    maintainer_email='opensource@groklearning.com',
     url='https://github.com/groklearning/simple-packages',
     license='MIT',
     package_dir={
