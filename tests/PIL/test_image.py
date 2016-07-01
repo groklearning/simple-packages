@@ -141,6 +141,20 @@ class TestPixelIndexing(ImageTestCase):
         except IndexError as e:
             pass
 
+    def test_repr(self):
+        img1 = Image.open(os.path.join(IMAGE_DIR, 'leaves_bw.png'))
+        first_pixel = img1[0, 0]
+        self.assertEqual('GrayPixel (0, 0) value: 44', str(first_pixel))
+        pixel = img1[4, 360]
+        self.assertEqual('GrayPixel (4, 360) value: 67', str(pixel))
+
+        img2 = Image.open(os.path.join(IMAGE_DIR, 'strawberries.png'))
+        first_pixel = img2[0, 0]
+        self.assertEqual(
+            'RGBPixel (0, 0) value: (77, 20, 9)', str(first_pixel))
+        pixel = img2[4, 360]
+        self.assertEqual('RGBPixel (4, 360) value: (41, 4, 11)', str(pixel))
+
 
 class TestPixelModifications(ImageTestCase):
 

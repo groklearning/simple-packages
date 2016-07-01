@@ -29,6 +29,9 @@ class Pixel:
             self._y = y
             self._coords = (x, y)
 
+    def __repr__(self):
+        return 'Pixel ({}, {})'.format(self._x, self._y)
+
     def get_coords(self):
         return self._coords
 
@@ -256,6 +259,9 @@ class GrayPixel(Pixel):
 
     __slots__ = ()
 
+    def __repr__(self):
+        return 'GrayPixel {} value: {}'.format(self._coords, self.gray)
+
     def get_color(self):
         return self._pixels[self._coords]
 
@@ -297,6 +303,9 @@ class GrayPixel(Pixel):
 class RGBPixel(Pixel):
 
     __slots__ = ()
+
+    def __repr__(self):
+        return 'RGBPixel {} value: {}'.format(self._coords, self.color)
 
     def set_color(self, value):
         if type(value) == tuple:
@@ -372,6 +381,9 @@ class RGBPixel(Pixel):
 class RGBAPixel(RGBPixel):
 
     __slots__ = ()
+
+    def __repr__(self):
+        return 'RGBPAixel {} value: {}'.format(self._coords, self.color)
 
     def get_alpha(self):
         return self._pixels[self._coords][0]
